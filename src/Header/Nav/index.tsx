@@ -8,15 +8,6 @@ import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { Menu, X } from 'lucide-react'
 
-// Home page sections for smooth scrolling
-// const homeSections = [
-//   { label: 'Our Story', href: '#love-story' },
-//   { label: 'Details', href: '#wedding-details' },
-//   { label: 'Dress Code', href: '#dress-code' },
-//   { label: 'FAQ', href: '#faq' },
-//   { label: 'RSVP Now', href: '#rsvp' },
-// ]
-
 const smoothScrollToSection = (href: string) => {
   const targetId = href.replace('#', '')
   const element = document.getElementById(targetId)
@@ -56,22 +47,6 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
     <>
       {/* Desktop Navigation */}
       <nav className="hidden md:flex gap-6 items-center">
-        {/* Show section navigation only on home page */}
-        {/* {isHomePage && (
-          <>
-            {homeSections.map((section, i) => (
-              <a
-                key={i}
-                href={section.href}
-                onClick={(e) => handleSectionClick(e, section.href)}
-                className="text-white hover:text-white/80 transition-colors font-medium cursor-pointer"
-              >
-                {section.label}
-              </a>
-            ))}
-          </>
-        )} */}
-
         {/* Always show CMS navigation items */}
         {navItems.map(({ link }, i) => {
           return (

@@ -47,8 +47,10 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   useEffect(() => {
     const checkAdminBar = () => {
       const adminBar = document.querySelector('.admin-bar')
-      if (adminBar && adminBar.classList.contains('block')) {
-        setAdminBarHeight(adminBar.getBoundingClientRect().height)
+      if (adminBar && !adminBar.classList.contains('hidden')) {
+        // Get the actual computed height
+        const height = adminBar.getBoundingClientRect().height
+        setAdminBarHeight(height > 0 ? height : 0)
       } else {
         setAdminBarHeight(0)
       }
@@ -58,22 +60,31 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     checkAdminBar()
 
     // Set up observer to watch for admin bar changes
-    const observer = new MutationObserver(checkAdminBar)
+    const observer = new MutationObserver((mutations) => {
+      // Check on any class changes
+      checkAdminBar()
+    })
+
     const adminBar = document.querySelector('.admin-bar')
 
     if (adminBar) {
       observer.observe(adminBar, {
         attributes: true,
         attributeFilter: ['class'],
+        childList: true, // Watch for content changes too
+        subtree: true,
       })
     }
 
-    // Also check periodically in case admin bar loads later
-    const interval = setInterval(checkAdminBar, 1000)
+    // Also check periodically and on scroll
+    const interval = setInterval(checkAdminBar, 500)
+    const handleScrollCheck = () => checkAdminBar()
+    window.addEventListener('scroll', handleScrollCheck, { passive: true })
 
     return () => {
       observer.disconnect()
       clearInterval(interval)
+      window.removeEventListener('scroll', handleScrollCheck)
     }
   }, [])
 
@@ -90,8 +101,8 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header
-      className={`fixed left-0 right-0 z-40 transition-all duration-300 ${getHeaderBackground()}`}
-      style={{ top: `${adminBarHeight}px` }}
+      className={`fixed left-0 right-0 top-0 z-40 transition-all duration-300 ${getHeaderBackground()}`}
+      style={{ top: adminBarHeight > 0 ? `${adminBarHeight}px` : '0px' }}
       {...(theme ? { 'data-theme': theme } : {})}
     >
       <div className="container mx-auto px-4">

@@ -1,96 +1,27 @@
-import type { RequiredDataFromCollectionSlug } from 'payload'
+import type { Block } from 'payload'
 
-// Used for pre-seeded content so that the homepage is not empty
-export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
-  slug: 'home',
-  _status: 'published',
-  hero: {
-    type: 'lowImpact',
-    richText: {
-      root: {
-        type: 'root',
-        children: [
-          {
-            type: 'heading',
-            children: [
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: 'Payload Website Template',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            tag: 'h1',
-            version: 1,
-          },
-          {
-            type: 'paragraph',
-            children: [
-              {
-                type: 'link',
-                children: [
-                  {
-                    type: 'text',
-                    detail: 0,
-                    format: 0,
-                    mode: 'normal',
-                    style: '',
-                    text: 'Visit the admin dashboard',
-                    version: 1,
-                  },
-                ],
-                direction: 'ltr',
-                fields: {
-                  linkType: 'custom',
-                  newTab: false,
-                  url: '/admin',
-                },
-                format: '',
-                indent: 0,
-                version: 2,
-              },
-              {
-                type: 'text',
-                detail: 0,
-                format: 0,
-                mode: 'normal',
-                style: '',
-                text: ' to make your account and seed content for your website.',
-                version: 1,
-              },
-            ],
-            direction: 'ltr',
-            format: '',
-            indent: 0,
-            textFormat: 0,
-            version: 1,
-          },
-        ],
-        direction: 'ltr',
-        format: '',
-        indent: 0,
-        version: 1,
-      },
-    },
-  },
-  meta: {
-    description: 'An open-source website built with Payload and Next.js.',
-    title: 'Payload Website Template',
-  },
-  title: 'Home',
-  layout: [
+export const Testimonials: Block = {
+  slug: 'testimonials',
+  interfaceName: 'TestimonialsBlock',
+  fields: [
     {
-      blockType: 'testimonials',
-      blockName: 'Testimonials',
-      heading: 'What Our Clients Are Saying',
-      subheading: 'Real stories from home buyers who found their dream properties effortlessly.',
-      testimonials: [
+      name: 'heading',
+      type: 'text',
+      required: true,
+      defaultValue: 'What Our Clients Are Saying',
+    },
+    {
+      name: 'subheading',
+      type: 'text',
+      defaultValue: 'Real stories from home buyers who found their dream properties effortlessly.',
+    },
+    {
+      name: 'testimonials',
+      type: 'array',
+      required: true,
+      minRows: 4,
+      maxRows: 12,
+      defaultValue: [
         {
           quote:
             'I found my dream home in just a few clicks! The search was so easy and the property details were super clear.',
@@ -172,6 +103,51 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
           bgColor: 'bg-cyan-100',
         },
       ],
+      fields: [
+        {
+          name: 'quote',
+          type: 'textarea',
+          required: true,
+        },
+        {
+          name: 'author',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'role',
+          type: 'text',
+          required: true,
+        },
+        {
+          name: 'initials',
+          type: 'text',
+          required: true,
+          maxLength: 3,
+        },
+        {
+          name: 'bgColor',
+          type: 'select',
+          required: true,
+          options: [
+            { label: 'Blue', value: 'bg-blue-100' },
+            { label: 'Purple', value: 'bg-purple-100' },
+            { label: 'Pink', value: 'bg-pink-100' },
+            { label: 'Green', value: 'bg-green-100' },
+            { label: 'Yellow', value: 'bg-yellow-100' },
+            { label: 'Indigo', value: 'bg-indigo-100' },
+            { label: 'Teal', value: 'bg-teal-100' },
+            { label: 'Orange', value: 'bg-orange-100' },
+            { label: 'Red', value: 'bg-red-100' },
+            { label: 'Cyan', value: 'bg-cyan-100' },
+          ],
+          defaultValue: 'bg-blue-100',
+        },
+      ],
     },
   ],
+  labels: {
+    plural: 'Testimonials',
+    singular: 'Testimonials',
+  },
 }
