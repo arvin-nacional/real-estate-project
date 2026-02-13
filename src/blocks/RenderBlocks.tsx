@@ -6,14 +6,17 @@ import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
+import { FeaturedListingsBlock } from '@/blocks/FeaturedListings/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { PageHeaderBlock } from '@/blocks/PageHeader/Component'
 import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
+  callToAction: CallToActionBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
+  featuredListings: FeaturedListingsBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   pageHeader: PageHeaderBlock,

@@ -9,6 +9,7 @@ import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { PageHeader } from '../../blocks/PageHeader/config'
 import { Testimonials } from '../../blocks/Testimonials/config'
+import { FeaturedListings } from '../../blocks/FeaturedListings/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
@@ -82,6 +83,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FormBlock,
                 PageHeader,
                 Testimonials,
+                FeaturedListings,
               ],
               required: true,
               admin: {

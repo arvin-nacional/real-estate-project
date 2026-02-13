@@ -14,7 +14,15 @@ export const Properties: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    defaultColumns: ['title', 'propertyType', 'listingType', 'price', 'city', 'status', 'updatedAt'],
+    defaultColumns: [
+      'title',
+      'propertyType',
+      'listingType',
+      'price',
+      'city',
+      'status',
+      'updatedAt',
+    ],
     useAsTitle: 'title',
   },
   defaultPopulate: {
@@ -167,7 +175,7 @@ export const Properties: CollectionConfig = {
               name: 'featuredImage',
               type: 'upload',
               relationTo: 'media',
-              required: true,
+              required: false,
             },
             {
               name: 'gallery',

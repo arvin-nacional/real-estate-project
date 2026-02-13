@@ -86,6 +86,15 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
   title: 'Home',
   layout: [
     {
+      blockType: 'featuredListings',
+      blockName: 'Featured Listings',
+      heading: 'Featured Properties',
+      subheading: 'Discover our handpicked selection of premium properties for sale and rent.',
+      maxListings: 6,
+      showFilters: true,
+      showViewAllButton: true,
+    },
+    {
       blockType: 'testimonials',
       blockName: 'Testimonials',
       heading: 'What Our Clients Are Saying',

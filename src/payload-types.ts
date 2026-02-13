@@ -208,6 +208,7 @@ export interface Page {
     | FormBlock
     | PageHeaderBlock
     | TestimonialsBlock
+    | FeaturedListingsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -830,6 +831,29 @@ export interface TestimonialsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedListingsBlock".
+ */
+export interface FeaturedListingsBlock {
+  heading: string;
+  subheading?: string | null;
+  /**
+   * Maximum number of properties to display
+   */
+  maxListings?: number | null;
+  /**
+   * Show property type and listing type filters
+   */
+  showFilters?: boolean | null;
+  /**
+   * Show "View All Properties" button
+   */
+  showViewAllButton?: boolean | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredListings';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties".
  */
 export interface Property {
@@ -877,7 +901,7 @@ export interface Property {
   city: string;
   state?: string | null;
   zipCode?: string | null;
-  featuredImage: string | Media;
+  featuredImage?: (string | null) | Media;
   gallery?:
     | {
         image: string | Media;
@@ -1209,6 +1233,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         pageHeader?: T | PageHeaderBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
+        featuredListings?: T | FeaturedListingsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1335,6 +1360,19 @@ export interface TestimonialsBlockSelect<T extends boolean = true> {
         bgColor?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedListingsBlock_select".
+ */
+export interface FeaturedListingsBlockSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  maxListings?: T;
+  showFilters?: T;
+  showViewAllButton?: T;
   id?: T;
   blockName?: T;
 }
