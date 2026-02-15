@@ -222,6 +222,15 @@ export const Properties: CollectionConfig = {
         position: 'sidebar',
       },
     },
+    {
+      name: 'featuredSold',
+      type: 'checkbox',
+      defaultValue: false,
+      admin: {
+        position: 'sidebar',
+        description: 'Add this sold property to the featured sold properties section',
+      },
+    },
     slugField(),
   ],
   versions: {

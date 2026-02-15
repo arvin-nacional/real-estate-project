@@ -6,10 +6,11 @@ import { ArchiveBlock } from '@/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ContentBlock } from '@/blocks/Content/Component'
 import { FormBlock } from '@/blocks/Form/Component'
-import { FeaturedListingsBlock } from '@/blocks/FeaturedListings/Component'
+import { FeaturedListingsBlock } from './FeaturedListings/Component'
+import { FeaturedSoldPropertiesComponent } from './FeaturedSoldProperties/Component'
+import { TestimonialsBlock } from './Testimonials/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { PageHeaderBlock } from '@/blocks/PageHeader/Component'
-import { TestimonialsBlock } from '@/blocks/Testimonials/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -17,6 +18,7 @@ const blockComponents = {
   content: ContentBlock,
   cta: CallToActionBlock,
   featuredListings: FeaturedListingsBlock,
+  featuredSoldProperties: FeaturedSoldPropertiesComponent,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
   pageHeader: PageHeaderBlock,

@@ -182,5 +182,12 @@ export const homeStatic: RequiredDataFromCollectionSlug<'pages'> = {
         },
       ],
     },
+    {
+      blockType: 'featuredSoldProperties',
+      blockName: 'Featured Sold Properties',
+      heading: 'Recently Sold Properties',
+      subheading: 'Take a look at these amazing properties that found their new owners',
+      maxListings: 6,
+    },
   ],
 }

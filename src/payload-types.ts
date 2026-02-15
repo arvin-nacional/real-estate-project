@@ -209,6 +209,7 @@ export interface Page {
     | PageHeaderBlock
     | TestimonialsBlock
     | FeaturedListingsBlock
+    | FeaturedSoldProperties
   )[];
   meta?: {
     title?: string | null;
@@ -854,6 +855,27 @@ export interface FeaturedListingsBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedSoldProperties".
+ */
+export interface FeaturedSoldProperties {
+  /**
+   * Main heading for the featured sold properties section
+   */
+  heading?: string | null;
+  /**
+   * Subheading or description text below the main heading
+   */
+  subheading?: string | null;
+  /**
+   * Maximum number of sold properties to display
+   */
+  maxListings?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'featuredSoldProperties';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties".
  */
 export interface Property {
@@ -910,6 +932,10 @@ export interface Property {
     | null;
   publishedAt?: string | null;
   featured?: boolean | null;
+  /**
+   * Add this sold property to the featured sold properties section
+   */
+  featuredSold?: boolean | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -1234,6 +1260,7 @@ export interface PagesSelect<T extends boolean = true> {
         pageHeader?: T | PageHeaderBlockSelect<T>;
         testimonials?: T | TestimonialsBlockSelect<T>;
         featuredListings?: T | FeaturedListingsBlockSelect<T>;
+        featuredSoldProperties?: T | FeaturedSoldPropertiesSelect<T>;
       };
   meta?:
     | T
@@ -1378,6 +1405,17 @@ export interface FeaturedListingsBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FeaturedSoldProperties_select".
+ */
+export interface FeaturedSoldPropertiesSelect<T extends boolean = true> {
+  heading?: T;
+  subheading?: T;
+  maxListings?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1435,6 +1473,7 @@ export interface PropertiesSelect<T extends boolean = true> {
       };
   publishedAt?: T;
   featured?: T;
+  featuredSold?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
