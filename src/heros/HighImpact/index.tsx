@@ -34,8 +34,20 @@ export const HighImpactHero: React.FC<Page['hero']> = ({ links, media, richText 
         </div>
       </div>
       <div className="min-h-[80vh] select-none">
+        {/* Background media (image or video) */}
         {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
+          <div className="absolute inset-0 w-full h-full">
+            <Media
+              key={`hero-media-${media.id || media.filename || new Date().getTime()}`}
+              fill
+              imgClassName="-z-10 object-cover"
+              videoClassName="-z-10 object-cover"
+              priority
+              resource={media}
+            />
+            {/* Light overlay to make text more readable */}
+            <div className="absolute inset-0 bg-black bg-opacity-30 -z-5"></div>
+          </div>
         )}
       </div>
     </div>

@@ -11,6 +11,8 @@ import { FeaturedSoldPropertiesComponent } from './FeaturedSoldProperties/Compon
 import { TestimonialsBlock } from './Testimonials/Component'
 import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { PageHeaderBlock } from '@/blocks/PageHeader/Component'
+import { ContactSectionBlock } from '@/blocks/ContactSection/Component'
+import { HeroCarouselBlock } from '@/blocks/HeroCarousel/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -23,6 +25,8 @@ const blockComponents = {
   mediaBlock: MediaBlock,
   pageHeader: PageHeaderBlock,
   testimonials: TestimonialsBlock,
+  contactSection: ContactSectionBlock,
+  heroCarousel: HeroCarouselBlock,
 }
 
 export const RenderBlocks: React.FC<{

@@ -210,6 +210,8 @@ export interface Page {
     | TestimonialsBlock
     | FeaturedListingsBlock
     | FeaturedSoldProperties
+    | ContactSectionBlock
+    | HeroCarouselBlock
   )[];
   meta?: {
     title?: string | null;
@@ -876,6 +878,111 @@ export interface FeaturedSoldProperties {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactSectionBlock".
+ */
+export interface ContactSectionBlock {
+  heading: string;
+  contactItems: {
+    icon: 'MapPin' | 'Phone' | 'Mail' | 'Clock';
+    iconColor: 'primary' | 'accent';
+    title: string;
+    description: string;
+    linkUrl?: string | null;
+    id?: string | null;
+  }[];
+  showWhyContactUs?: boolean | null;
+  whyContactUsHeading?: string | null;
+  whyContactUsItems?:
+    | {
+        color: 'primary' | 'accent';
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  formHeading: string;
+  formDescription?: string | null;
+  form: string | Form;
+  privacyText?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'contactSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroCarouselBlock".
+ */
+export interface HeroCarouselBlock {
+  /**
+   * Main hero title (e.g., "Rosie & James")
+   */
+  title: string;
+  /**
+   * Subtitle text (e.g., "June 15th, 2024 • Bloomfield, CA")
+   */
+  subtitle?: string | null;
+  /**
+   * Optional rich text description below the subtitle
+   */
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Hero background images for the carousel
+   */
+  images: {
+    image: string | Media;
+    id?: string | null;
+  }[];
+  /**
+   * Primary call-to-action button (e.g., "RSVP Now")
+   */
+  primaryButton: {
+    link: {
+      type?: ('reference' | 'custom') | null;
+      newTab?: boolean | null;
+      reference?:
+        | ({
+            relationTo: 'pages';
+            value: string | Page;
+          } | null)
+        | ({
+            relationTo: 'posts';
+            value: string | Post;
+          } | null);
+      url?: string | null;
+      label: string;
+      /**
+       * Choose how the link should be rendered.
+       */
+      appearance?: 'default' | null;
+    };
+  };
+  /**
+   * Automatically advance carousel images
+   */
+  autoAdvance?: boolean | null;
+  /**
+   * Auto-advance interval in milliseconds (1000-30000)
+   */
+  autoAdvanceInterval?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'heroCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties".
  */
 export interface Property {
@@ -1261,6 +1368,8 @@ export interface PagesSelect<T extends boolean = true> {
         testimonials?: T | TestimonialsBlockSelect<T>;
         featuredListings?: T | FeaturedListingsBlockSelect<T>;
         featuredSoldProperties?: T | FeaturedSoldPropertiesSelect<T>;
+        contactSection?: T | ContactSectionBlockSelect<T>;
+        heroCarousel?: T | HeroCarouselBlockSelect<T>;
       };
   meta?:
     | T
@@ -1411,6 +1520,71 @@ export interface FeaturedSoldPropertiesSelect<T extends boolean = true> {
   heading?: T;
   subheading?: T;
   maxListings?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ContactSectionBlock_select".
+ */
+export interface ContactSectionBlockSelect<T extends boolean = true> {
+  heading?: T;
+  contactItems?:
+    | T
+    | {
+        icon?: T;
+        iconColor?: T;
+        title?: T;
+        description?: T;
+        linkUrl?: T;
+        id?: T;
+      };
+  showWhyContactUs?: T;
+  whyContactUsHeading?: T;
+  whyContactUsItems?:
+    | T
+    | {
+        color?: T;
+        text?: T;
+        id?: T;
+      };
+  formHeading?: T;
+  formDescription?: T;
+  form?: T;
+  privacyText?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HeroCarouselBlock_select".
+ */
+export interface HeroCarouselBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  description?: T;
+  images?:
+    | T
+    | {
+        image?: T;
+        id?: T;
+      };
+  primaryButton?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+      };
+  autoAdvance?: T;
+  autoAdvanceInterval?: T;
   id?: T;
   blockName?: T;
 }
