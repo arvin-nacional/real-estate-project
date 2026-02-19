@@ -22,25 +22,22 @@ export const FeaturedListingsBlock: React.FC<FeaturedListingsBlockProps> = ({
     const fetchProperties = async () => {
       try {
         setLoading(true)
-        const response = await fetch('/api/properties')
-        const data = await response.json()
-        
-        let filteredProperties = data.docs || []
-        
-        // Apply filters
+        const params = new URLSearchParams()
+        params.append('where[featured][equals]', 'true')
+        params.append('limit', String(maxListings))
+
         if (filter !== 'all') {
-          filteredProperties = filteredProperties.filter((p: any) => p.listingType === filter)
+          params.append('where[listingType][equals]', filter)
         }
-        
+
         if (propertyTypeFilter !== 'all') {
-          filteredProperties = filteredProperties.filter((p: any) => p.propertyType === propertyTypeFilter)
+          params.append('where[propertyType][equals]', propertyTypeFilter)
         }
-        
-        // Only show featured properties
-        filteredProperties = filteredProperties.filter((p: any) => p.featured)
-        
-        // Limit to maxListings
-        setProperties(filteredProperties.slice(0, maxListings))
+
+        const response = await fetch(`/api/properties?${params.toString()}`)
+        const data = await response.json()
+
+        setProperties(data.docs || [])
       } catch (error) {
         console.error('Error fetching properties:', error)
       } finally {
@@ -93,9 +90,7 @@ export const FeaturedListingsBlock: React.FC<FeaturedListingsBlockProps> = ({
         <div className="text-center mb-12">
           {heading && <h2 className="text-3xl md:text-4xl font-bold mb-4">{heading}</h2>}
           {subheading && (
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              {subheading}
-            </p>
+            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">{subheading}</p>
           )}
         </div>
 

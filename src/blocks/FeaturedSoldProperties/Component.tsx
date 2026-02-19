@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { Media } from '@/components/Media'
 
 interface Property {
   id: string
@@ -47,17 +48,13 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
       {/* Property Image */}
       <div className="relative h-48 bg-gray-200">
         {property.featuredImage ? (
-          <img
-            src={property.featuredImage.url}
-            alt={property.title}
-            className="w-full h-full object-cover"
-          />
+          <Media resource={property.featuredImage} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-300">
             <span className="text-gray-500">No Image</span>
           </div>
         )}
-        
+
         {/* Sold Badge */}
         <div className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
           SOLD
@@ -66,14 +63,10 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
 
       {/* Property Details */}
       <div className="p-4">
-        <h3 className="font-semibold text-lg mb-2 text-gray-900 line-clamp-2">
-          {property.title}
-        </h3>
-        
+        <h3 className="font-semibold text-lg mb-2 text-gray-900 line-clamp-2">{property.title}</h3>
+
         <div className="flex items-center justify-between mb-3">
-          <span className="text-xl font-bold text-gray-900">
-            {formatPrice(property.price)}
-          </span>
+          <span className="text-xl font-bold text-gray-900">{formatPrice(property.price)}</span>
           <span className="text-sm text-gray-500">
             {formatDate(property.soldAt || new Date().toISOString())}
           </span>
@@ -86,9 +79,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
         </div>
 
         <div className="flex items-center justify-between text-sm">
-          <span className="text-gray-600 capitalize">
-            {property.propertyType}
-          </span>
+          <span className="text-gray-600 capitalize">{property.propertyType}</span>
           <span className="text-gray-500">
             {property.city}, {property.state}
           </span>
@@ -111,12 +102,14 @@ export const FeaturedSoldPropertiesComponent: React.FC<FeaturedSoldPropertiesPro
     const fetchSoldProperties = async () => {
       try {
         setLoading(true)
-        const response = await fetch(`/api/properties?featuredSold=true&limit=${maxListings}`)
-        
+        const response = await fetch(
+          `/api/properties?where[featuredSold][equals]=true&limit=${maxListings}`,
+        )
+
         if (!response.ok) {
           throw new Error('Failed to fetch sold properties')
         }
-        
+
         const data = await response.json()
         setProperties(data.docs || [])
       } catch (err) {
@@ -139,7 +132,10 @@ export const FeaturedSoldPropertiesComponent: React.FC<FeaturedSoldPropertiesPro
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {Array.from({ length: maxListings }).map((_, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+              <div
+                key={index}
+                className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse"
+              >
                 <div className="h-48 bg-gray-300"></div>
                 <div className="p-4">
                   <div className="h-6 bg-gray-300 rounded mb-2"></div>

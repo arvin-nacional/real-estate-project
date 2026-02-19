@@ -5,7 +5,7 @@ import React, { useEffect, useRef } from 'react'
 
 import type { Props as MediaProps } from '../types'
 
-import { getClientSideURL } from '@/utilities/getURL'
+import { getMediaUrl } from '@/utilities/getMediaUrl'
 
 export const VideoMedia: React.FC<MediaProps> = (props) => {
   const { fill, imgClassName, onClick, resource, videoClassName } = props
@@ -24,22 +24,13 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
   }, [])
 
   if (resource && typeof resource === 'object') {
-    // Get the URL from the resource or construct it properly for S3
-    let videoUrl = resource.url
-      ? `${getClientSideURL()}${resource.url}`
-      : resource.filename
-        ? `https://${process.env.NEXT_PUBLIC_S3_BUCKET || process.env.S3_BUCKET}.s3.${process.env.NEXT_PUBLIC_S3_REGION || process.env.S3_REGION}.amazonaws.com/${resource.filename}`
-        : ''
+    // Pass the entire resource object to getMediaUrl
+    // This will try all available URL strategies (url, filename with S3 construction)
+    const videoUrl = getMediaUrl(resource)
 
-    // Add cache-busting parameter with timestamp
-    if (videoUrl) {
-      const cacheBuster = new Date().getTime()
-      videoUrl = videoUrl.includes('?')
-        ? `${videoUrl}&_cb=${cacheBuster}`
-        : `${videoUrl}?_cb=${cacheBuster}`
-    }
+    if (!videoUrl) return null
 
-    console.log('Video URL:', videoUrl) // For debugging
+    console.log('Using video URL:', videoUrl)
 
     return (
       <video
@@ -50,13 +41,17 @@ export const VideoMedia: React.FC<MediaProps> = (props) => {
           fill && 'absolute inset-0 w-full h-full object-cover',
         )}
         controls={false}
+        crossOrigin="anonymous"
         loop
         muted
         onClick={onClick}
         playsInline
+        preload="auto"
         ref={videoRef}
       >
         <source src={videoUrl} type="video/mp4" />
+        {/* Fallback text for browsers that don't support video */}
+        Your browser does not support the video tag.
       </video>
     )
   }
