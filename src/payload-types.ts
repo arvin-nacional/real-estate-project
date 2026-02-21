@@ -199,6 +199,14 @@ export interface Page {
         }[]
       | null;
     media?: (string | null) | Media;
+    /**
+     * Optional background video (MP4). Overrides the media image when set.
+     */
+    backgroundVideo?: (string | null) | Media;
+    /**
+     * Dark overlay opacity (0–100%). Helps text readability over video.
+     */
+    overlayOpacity?: number | null;
   };
   layout: (
     | CallToActionBlock
@@ -212,6 +220,7 @@ export interface Page {
     | FeaturedSoldProperties
     | ContactSectionBlock
     | HeroCarouselBlock
+    | SellYourHomeBlock
   )[];
   meta?: {
     title?: string | null;
@@ -455,6 +464,14 @@ export interface User {
  * via the `definition` "CallToActionBlock".
  */
 export interface CallToActionBlock {
+  /**
+   * Optional background video (MP4 recommended). Falls back to gradient if not set.
+   */
+  backgroundVideo?: (string | null) | Media;
+  /**
+   * Dark overlay opacity (0–100%). Helps text readability over video.
+   */
+  overlayOpacity?: number | null;
   richText?: {
     root: {
       type: string;
@@ -797,6 +814,14 @@ export interface Form {
  * via the `definition` "PageHeaderBlock".
  */
 export interface PageHeaderBlock {
+  /**
+   * Optional background video (MP4 recommended). Falls back to gradient if not set.
+   */
+  backgroundVideo?: (string | null) | Media;
+  /**
+   * Dark overlay opacity (0–100%). Helps text readability over video.
+   */
+  overlayOpacity?: number | null;
   heading: string;
   description?: string | null;
   id?: string | null;
@@ -983,6 +1008,69 @@ export interface HeroCarouselBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SellYourHomeBlock".
+ */
+export interface SellYourHomeBlock {
+  heading: string;
+  description?: string | null;
+  /**
+   * Optional background image for the hero area.
+   */
+  backgroundImage?: (string | null) | Media;
+  steps?:
+    | {
+        title: string;
+        description: string;
+        icon:
+          | 'Home'
+          | 'Search'
+          | 'Camera'
+          | 'TrendingUp'
+          | 'Handshake'
+          | 'DollarSign'
+          | 'CheckCircle'
+          | 'ClipboardList';
+        id?: string | null;
+      }[]
+    | null;
+  benefits?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  ctaHeading?: string | null;
+  ctaDescription?: string | null;
+  links?:
+    | {
+        link: {
+          type?: ('reference' | 'custom') | null;
+          newTab?: boolean | null;
+          reference?:
+            | ({
+                relationTo: 'pages';
+                value: string | Page;
+              } | null)
+            | ({
+                relationTo: 'posts';
+                value: string | Post;
+              } | null);
+          url?: string | null;
+          label: string;
+          /**
+           * Choose how the link should be rendered.
+           */
+          appearance?: ('default' | 'outline') | null;
+        };
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sellYourHome';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties".
  */
 export interface Property {
@@ -1030,6 +1118,14 @@ export interface Property {
   city: string;
   state?: string | null;
   zipCode?: string | null;
+  /**
+   * GPS latitude coordinate
+   */
+  latitude?: number | null;
+  /**
+   * GPS longitude coordinate
+   */
+  longitude?: number | null;
   featuredImage?: (string | null) | Media;
   gallery?:
     | {
@@ -1355,6 +1451,8 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
             };
         media?: T;
+        backgroundVideo?: T;
+        overlayOpacity?: T;
       };
   layout?:
     | T
@@ -1370,6 +1468,7 @@ export interface PagesSelect<T extends boolean = true> {
         featuredSoldProperties?: T | FeaturedSoldPropertiesSelect<T>;
         contactSection?: T | ContactSectionBlockSelect<T>;
         heroCarousel?: T | HeroCarouselBlockSelect<T>;
+        sellYourHome?: T | SellYourHomeBlockSelect<T>;
       };
   meta?:
     | T
@@ -1390,6 +1489,8 @@ export interface PagesSelect<T extends boolean = true> {
  * via the `definition` "CallToActionBlock_select".
  */
 export interface CallToActionBlockSelect<T extends boolean = true> {
+  backgroundVideo?: T;
+  overlayOpacity?: T;
   richText?: T;
   links?:
     | T
@@ -1474,6 +1575,8 @@ export interface FormBlockSelect<T extends boolean = true> {
  * via the `definition` "PageHeaderBlock_select".
  */
 export interface PageHeaderBlockSelect<T extends boolean = true> {
+  backgroundVideo?: T;
+  overlayOpacity?: T;
   heading?: T;
   description?: T;
   id?: T;
@@ -1590,6 +1693,48 @@ export interface HeroCarouselBlockSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SellYourHomeBlock_select".
+ */
+export interface SellYourHomeBlockSelect<T extends boolean = true> {
+  heading?: T;
+  description?: T;
+  backgroundImage?: T;
+  steps?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        icon?: T;
+        id?: T;
+      };
+  benefits?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  ctaHeading?: T;
+  ctaDescription?: T;
+  links?:
+    | T
+    | {
+        link?:
+          | T
+          | {
+              type?: T;
+              newTab?: T;
+              reference?: T;
+              url?: T;
+              label?: T;
+              appearance?: T;
+            };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "posts_select".
  */
 export interface PostsSelect<T extends boolean = true> {
@@ -1638,6 +1783,8 @@ export interface PropertiesSelect<T extends boolean = true> {
   city?: T;
   state?: T;
   zipCode?: T;
+  latitude?: T;
+  longitude?: T;
   featuredImage?: T;
   gallery?:
     | T

@@ -166,6 +166,27 @@ export const Properties: CollectionConfig = {
                 },
               ],
             },
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'latitude',
+                  type: 'number',
+                  admin: {
+                    step: 0.000001,
+                    description: 'GPS latitude coordinate',
+                  },
+                },
+                {
+                  name: 'longitude',
+                  type: 'number',
+                  admin: {
+                    step: 0.000001,
+                    description: 'GPS longitude coordinate',
+                  },
+                },
+              ],
+            },
           ],
         },
         {

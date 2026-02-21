@@ -9,12 +9,14 @@ import { imageHero1 } from './image-hero-1'
 import { post1 } from './post-1'
 import { post2 } from './post-2'
 import { post3 } from './post-3'
+import { propertiesSeed } from './properties'
 
 const collections: CollectionSlug[] = [
   'categories',
   'media',
   'pages',
   'posts',
+  'properties',
   'forms',
   'form-submissions',
   'search',
@@ -273,6 +275,26 @@ export const seed = async ({
       },
     }),
   ])
+
+  payload.logger.info(`— Seeding properties...`)
+
+  for (const propertyData of propertiesSeed) {
+    try {
+      await payload.create({
+        collection: 'properties',
+        depth: 0,
+        context: {
+          disableRevalidate: true,
+        },
+        data: propertyData as any,
+      })
+      payload.logger.info(`  Created: ${propertyData.title}`)
+    } catch (error) {
+      payload.logger.error(
+        `  Failed: ${propertyData.title} - ${error instanceof Error ? error.message : error}`,
+      )
+    }
+  }
 
   payload.logger.info('Seeded database successfully!')
 }

@@ -35,6 +35,8 @@ export default async function PropertiesPage({
     typeof searchParams.bathrooms === 'string' ? Number(searchParams.bathrooms) : undefined
   const city = typeof searchParams.city === 'string' ? searchParams.city : undefined
   const page = typeof searchParams.page === 'string' ? Number(searchParams.page) : 1
+  const lat = typeof searchParams.lat === 'string' ? Number(searchParams.lat) : undefined
+  const lng = typeof searchParams.lng === 'string' ? Number(searchParams.lng) : undefined
 
   const where: Where[] = [{ _status: { equals: 'published' } }]
 
@@ -63,16 +65,31 @@ export default async function PropertiesPage({
   const properties = await payload.find({
     collection: 'properties',
     depth: 1,
-    limit: 12,
+    limit: 50,
     page,
     sort: '-createdAt',
     where: {
       and: where,
     },
+    select: {
+      title: true,
+      slug: true,
+      propertyType: true,
+      listingType: true,
+      price: true,
+      bedrooms: true,
+      bathrooms: true,
+      area: true,
+      city: true,
+      state: true,
+      featuredImage: true,
+      latitude: true,
+      longitude: true,
+    },
   })
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-32 pb-24">
       <div className="container mb-8">
         <h1 className="text-3xl font-bold mb-2">Properties</h1>
         <p className="text-muted-foreground">
@@ -88,7 +105,7 @@ export default async function PropertiesPage({
       </div>
 
       <PropertyFilters
-        properties={properties.docs}
+        properties={properties.docs as any}
         totalPages={properties.totalPages}
         currentPage={properties.page ?? 1}
         initialFilters={{
@@ -100,6 +117,7 @@ export default async function PropertiesPage({
           bathrooms: bathrooms?.toString(),
           city,
         }}
+        initialMapCenter={lat && lng ? [lng, lat] : undefined}
       />
     </div>
   )

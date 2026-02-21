@@ -13,6 +13,7 @@ import { FeaturedListings } from '@/blocks/FeaturedListings/config'
 import { FeaturedSoldProperties } from '@/blocks/FeaturedSoldProperties/config'
 import { ContactSection } from '@/blocks/ContactSection/config'
 import { HeroCarousel } from '@/blocks/HeroCarousel/config'
+import { SellYourHome } from '@/blocks/SellYourHome/config'
 
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
@@ -91,6 +92,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FeaturedSoldProperties,
                 ContactSection,
                 HeroCarousel,
+                SellYourHome,
               ],
               required: true,
               admin: {

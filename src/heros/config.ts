@@ -55,7 +55,7 @@ export const hero: Field = {
     },
     linkGroup({
       overrides: {
-        maxRows: 2,
+        maxRows: 3,
       },
     }),
     {
@@ -65,7 +65,28 @@ export const hero: Field = {
         condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
       },
       relationTo: 'media',
-      required: true,
+      required: false,
+    },
+    {
+      name: 'backgroundVideo',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: (_, { type } = {}) => ['highImpact'].includes(type),
+        description: 'Optional background video (MP4). Overrides the media image when set.',
+      },
+    },
+    {
+      name: 'overlayOpacity',
+      type: 'number',
+      min: 0,
+      max: 100,
+      defaultValue: 30,
+      admin: {
+        condition: (_, { type } = {}) => ['highImpact'].includes(type),
+        description: 'Dark overlay opacity (0–100%). Helps text readability over video.',
+        step: 5,
+      },
     },
   ],
   label: false,
