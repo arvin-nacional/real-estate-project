@@ -79,17 +79,21 @@ export default async function PropertyPage({ params: paramsPromise }: Args) {
   }
 
   return (
-    <div className="pt-24 pb-24">
+    <div className="pt-32 pb-24">
       <div className="container">
         {/* Header */}
         <div className="mb-6">
           <div className="flex flex-wrap items-center gap-2 mb-2">
             <span
               className={`px-3 py-1 rounded-full text-xs font-semibold text-white ${
-                listingType === 'rent' ? 'bg-blue-600' : 'bg-green-600'
+                listingType === 'rent'
+                  ? 'bg-blue-600'
+                  : listingType === 'sold'
+                    ? 'bg-red-600'
+                    : 'bg-green-600'
               }`}
             >
-              {listingType === 'rent' ? 'For Rent' : 'For Sale'}
+              {listingType === 'rent' ? 'For Rent' : listingType === 'sold' ? 'Sold' : 'For Sale'}
             </span>
             {propertyType && (
               <span className="px-3 py-1 rounded-full text-xs font-semibold bg-muted text-muted-foreground">
@@ -234,7 +238,11 @@ export default async function PropertyPage({ params: paramsPromise }: Args) {
                 <div className="flex justify-between">
                   <span className="text-muted-foreground">Listing Type</span>
                   <span className="font-medium">
-                    {listingType === 'rent' ? 'For Rent' : 'For Sale'}
+                    {listingType === 'rent'
+                      ? 'For Rent'
+                      : listingType === 'sold'
+                        ? 'Sold'
+                        : 'For Sale'}
                   </span>
                 </div>
                 {bedrooms != null && (

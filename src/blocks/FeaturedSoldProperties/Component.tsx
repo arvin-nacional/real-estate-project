@@ -44,20 +44,29 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-      {/* Property Image */}
-      <div className="relative h-48 bg-gray-200">
-        {property.featuredImage ? (
-          <Media resource={property.featuredImage} className="w-full h-full object-cover" />
-        ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gray-300">
-            <span className="text-gray-500">No Image</span>
-          </div>
-        )}
+    <Link
+      href={`/properties/${property.slug}`}
+      className="group block bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300"
+    >
+      {/* Property Image — 16:9 */}
+      <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
+        <div className="absolute inset-0 bg-gray-200">
+          {property.featuredImage ? (
+            <Media
+              resource={property.featuredImage}
+              imgClassName="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gray-300">
+              <span className="text-gray-500">No Image</span>
+            </div>
+          )}
 
-        {/* Sold Badge */}
-        <div className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-          SOLD
+          {/* Sold Badge */}
+          <div className="absolute top-2 right-2 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+            SOLD
+          </div>
         </div>
       </div>
 
@@ -85,7 +94,7 @@ const PropertyCard: React.FC<{ property: Property }> = ({ property }) => {
           </span>
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
@@ -187,7 +196,7 @@ export const FeaturedSoldPropertiesComponent: React.FC<FeaturedSoldPropertiesPro
           ))}
         </div>
 
-        {properties.length > 0 && (
+        {/* {properties.length > 0 && (
           <div className="text-center mt-8">
             <Link
               href="/properties?status=sold"
@@ -196,7 +205,7 @@ export const FeaturedSoldPropertiesComponent: React.FC<FeaturedSoldPropertiesPro
               View All Sold Properties
             </Link>
           </div>
-        )}
+        )} */}
       </div>
     </section>
   )

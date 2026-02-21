@@ -1077,7 +1077,7 @@ export interface Property {
   id: string;
   title: string;
   propertyType: 'house' | 'apartment' | 'condo' | 'townhouse' | 'villa' | 'land' | 'commercial';
-  listingType: 'sale' | 'rent';
+  listingType: 'sale' | 'rent' | 'sold';
   price: number;
   area?: number | null;
   bedrooms?: number | null;

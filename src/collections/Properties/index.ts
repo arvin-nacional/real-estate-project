@@ -74,6 +74,7 @@ export const Properties: CollectionConfig = {
                   options: [
                     { label: 'For Sale', value: 'sale' },
                     { label: 'For Rent', value: 'rent' },
+                    { label: 'Sold', value: 'sold' },
                   ],
                 },
               ],
@@ -254,6 +255,16 @@ export const Properties: CollectionConfig = {
     },
     slugField(),
   ],
+  hooks: {
+    beforeChange: [
+      ({ data }) => {
+        if (data.featuredSold === true) {
+          data.listingType = 'sold'
+        }
+        return data
+      },
+    ],
+  },
   versions: {
     drafts: {
       autosave: {
