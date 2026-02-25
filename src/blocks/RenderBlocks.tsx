@@ -14,6 +14,9 @@ import { PageHeaderBlock } from '@/blocks/PageHeader/Component'
 import { ContactSectionBlock } from '@/blocks/ContactSection/Component'
 import { HeroCarouselBlock } from '@/blocks/HeroCarousel/Component'
 import { SellYourHomeBlock } from '@/blocks/SellYourHome/Component'
+import { FAQBlock } from '@/blocks/FAQ/Component'
+import { SideBySideBlock } from '@/blocks/SideBySide/Component'
+import { TeamSectionBlock } from '@/blocks/TeamSection/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -29,6 +32,9 @@ const blockComponents = {
   contactSection: ContactSectionBlock,
   heroCarousel: HeroCarouselBlock,
   sellYourHome: SellYourHomeBlock,
+  faq: FAQBlock,
+  sideBySide: SideBySideBlock,
+  teamSection: TeamSectionBlock,
 }
 
 export const RenderBlocks: React.FC<{

@@ -221,6 +221,9 @@ export interface Page {
     | ContactSectionBlock
     | HeroCarouselBlock
     | SellYourHomeBlock
+    | FAQBlock
+    | SideBySideBlock
+    | TeamSectionBlock
   )[];
   meta?: {
     title?: string | null;
@@ -1071,6 +1074,117 @@ export interface SellYourHomeBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock".
+ */
+export interface FAQBlock {
+  /**
+   * Small text above the title
+   */
+  tagline?: string | null;
+  title: string;
+  /**
+   * Large circular image (main)
+   */
+  primaryImage: string | Media;
+  /**
+   * Medium circular image (top-left, optional)
+   */
+  secondaryImage?: (string | null) | Media;
+  /**
+   * Small circular image (bottom-right, optional)
+   */
+  tertiaryImage?: (string | null) | Media;
+  faqItems?:
+    | {
+        question: string;
+        answer: string;
+        /**
+         * Show this item expanded by default
+         */
+        defaultOpen?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'faq';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideBySideBlock".
+ */
+export interface SideBySideBlock {
+  /**
+   * Small text above the title
+   */
+  tagline?: string | null;
+  title: string;
+  /**
+   * Main description text
+   */
+  description: string;
+  /**
+   * Main image (left/top)
+   */
+  primaryImage: string | Media;
+  /**
+   * Secondary image (right/bottom, optional)
+   */
+  secondaryImage?: (string | null) | Media;
+  /**
+   * Weekday hours
+   */
+  weekdays?: string | null;
+  /**
+   * Weekend hours
+   */
+  weekends?: string | null;
+  button?: {
+    text?: string | null;
+    /**
+     * URL or path for the button
+     */
+    link?: string | null;
+  };
+  /**
+   * Background color for the section
+   */
+  backgroundColor?: ('bg-gray-50' | 'bg-blue-50' | 'bg-green-50' | 'bg-yellow-50' | 'bg-white') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'sideBySide';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamSectionBlock".
+ */
+export interface TeamSectionBlock {
+  /**
+   * Small text above the title
+   */
+  tagline?: string | null;
+  title: string;
+  description: string;
+  teamMembers?:
+    | {
+        name: string;
+        /**
+         * Job title or role
+         */
+        title: string;
+        /**
+         * Team member photo
+         */
+        image: string | Media;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'teamSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "properties".
  */
 export interface Property {
@@ -1469,6 +1583,9 @@ export interface PagesSelect<T extends boolean = true> {
         contactSection?: T | ContactSectionBlockSelect<T>;
         heroCarousel?: T | HeroCarouselBlockSelect<T>;
         sellYourHome?: T | SellYourHomeBlockSelect<T>;
+        faq?: T | FAQBlockSelect<T>;
+        sideBySide?: T | SideBySideBlockSelect<T>;
+        teamSection?: T | TeamSectionBlockSelect<T>;
       };
   meta?:
     | T
@@ -1728,6 +1845,68 @@ export interface SellYourHomeBlockSelect<T extends boolean = true> {
               label?: T;
               appearance?: T;
             };
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "FAQBlock_select".
+ */
+export interface FAQBlockSelect<T extends boolean = true> {
+  tagline?: T;
+  title?: T;
+  primaryImage?: T;
+  secondaryImage?: T;
+  tertiaryImage?: T;
+  faqItems?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        defaultOpen?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "SideBySideBlock_select".
+ */
+export interface SideBySideBlockSelect<T extends boolean = true> {
+  tagline?: T;
+  title?: T;
+  description?: T;
+  primaryImage?: T;
+  secondaryImage?: T;
+  weekdays?: T;
+  weekends?: T;
+  button?:
+    | T
+    | {
+        text?: T;
+        link?: T;
+      };
+  backgroundColor?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "TeamSectionBlock_select".
+ */
+export interface TeamSectionBlockSelect<T extends boolean = true> {
+  tagline?: T;
+  title?: T;
+  description?: T;
+  teamMembers?:
+    | T
+    | {
+        name?: T;
+        title?: T;
+        image?: T;
         id?: T;
       };
   id?: T;
