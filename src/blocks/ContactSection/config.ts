@@ -5,6 +5,26 @@ export const ContactSection: Block = {
   interfaceName: 'ContactSectionBlock',
   fields: [
     {
+      name: 'title',
+      type: 'text',
+      required: true,
+      defaultValue: 'Contact Us',
+      admin: {
+        description: 'Main title for the contact section',
+      },
+      label: 'Section Title',
+    },
+    {
+      name: 'subtitle',
+      type: 'text',
+      required: true,
+      defaultValue: 'Get in touch with us',
+      admin: {
+        description: 'Subtitle for the contact section',
+      },
+      label: 'Section Subtitle',
+    },
+    {
       name: 'heading',
       type: 'text',
       required: true,

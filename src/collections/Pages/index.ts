@@ -17,6 +17,7 @@ import { SellYourHome } from '@/blocks/SellYourHome/config'
 import { FAQ } from '@/blocks/FAQ/config'
 import { SideBySide } from '@/blocks/SideBySide/config'
 import { TeamSection } from '@/blocks/TeamSection/config'
+import { WhyChooseUs } from '@/blocks/WhyChooseUs/config'
 
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
@@ -99,6 +100,7 @@ export const Pages: CollectionConfig<'pages'> = {
                 FAQ,
                 SideBySide,
                 TeamSection,
+                WhyChooseUs,
               ],
               required: true,
               admin: {

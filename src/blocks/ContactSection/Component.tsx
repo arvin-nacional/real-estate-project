@@ -19,6 +19,8 @@ const iconMap = {
 }
 
 export const ContactSectionBlock: React.FC<ContactSectionBlockProps> = ({
+  title,
+  subtitle,
   heading,
   contactItems,
   showWhyContactUs,
@@ -116,8 +118,13 @@ export const ContactSectionBlock: React.FC<ContactSectionBlockProps> = ({
   )
 
   return (
-    <section className="py-16 md:py-24">
+    <section className="py-16 md:py-24  mt-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          {title && <h2 className="text-4xl font-bold mb-4">{title}</h2>}
+          {subtitle && <p className="text-gray-600 text-base max-w-2xl mx-auto">{subtitle}</p>}
+        </div>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Info */}
           <div className="space-y-8">

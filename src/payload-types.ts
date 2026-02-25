@@ -224,6 +224,7 @@ export interface Page {
     | FAQBlock
     | SideBySideBlock
     | TeamSectionBlock
+    | WhyChooseUsBlock
   )[];
   meta?: {
     title?: string | null;
@@ -909,6 +910,14 @@ export interface FeaturedSoldProperties {
  * via the `definition` "ContactSectionBlock".
  */
 export interface ContactSectionBlock {
+  /**
+   * Main title for the contact section
+   */
+  title: string;
+  /**
+   * Subtitle for the contact section
+   */
+  subtitle: string;
   heading: string;
   contactItems: {
     icon: 'MapPin' | 'Phone' | 'Mail' | 'Clock';
@@ -1182,6 +1191,38 @@ export interface TeamSectionBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'teamSection';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WhyChooseUsBlock".
+ */
+export interface WhyChooseUsBlock {
+  /**
+   * Small text above the title
+   */
+  tagline?: string | null;
+  title: string;
+  description: string;
+  features?:
+    | {
+        title: string;
+        icon?: ('home' | 'shield' | 'trending-up' | 'users' | 'award' | 'clock' | 'map-pin' | 'building') | null;
+        id?: string | null;
+      }[]
+    | null;
+  stats?:
+    | {
+        label: string;
+        /**
+         * Display value (e.g., "15+", "2.5k+")
+         */
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'whyChooseUs';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1586,6 +1627,7 @@ export interface PagesSelect<T extends boolean = true> {
         faq?: T | FAQBlockSelect<T>;
         sideBySide?: T | SideBySideBlockSelect<T>;
         teamSection?: T | TeamSectionBlockSelect<T>;
+        whyChooseUs?: T | WhyChooseUsBlockSelect<T>;
       };
   meta?:
     | T
@@ -1748,6 +1790,8 @@ export interface FeaturedSoldPropertiesSelect<T extends boolean = true> {
  * via the `definition` "ContactSectionBlock_select".
  */
 export interface ContactSectionBlockSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
   heading?: T;
   contactItems?:
     | T
@@ -1907,6 +1951,31 @@ export interface TeamSectionBlockSelect<T extends boolean = true> {
         name?: T;
         title?: T;
         image?: T;
+        id?: T;
+      };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "WhyChooseUsBlock_select".
+ */
+export interface WhyChooseUsBlockSelect<T extends boolean = true> {
+  tagline?: T;
+  title?: T;
+  description?: T;
+  features?:
+    | T
+    | {
+        title?: T;
+        icon?: T;
+        id?: T;
+      };
+  stats?:
+    | T
+    | {
+        label?: T;
+        value?: T;
         id?: T;
       };
   id?: T;

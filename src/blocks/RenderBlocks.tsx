@@ -17,6 +17,7 @@ import { SellYourHomeBlock } from '@/blocks/SellYourHome/Component'
 import { FAQBlock } from '@/blocks/FAQ/Component'
 import { SideBySideBlock } from '@/blocks/SideBySide/Component'
 import { TeamSectionBlock } from '@/blocks/TeamSection/Component'
+import { WhyChooseUsBlock } from '@/blocks/WhyChooseUs/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -35,6 +36,7 @@ const blockComponents = {
   faq: FAQBlock,
   sideBySide: SideBySideBlock,
   teamSection: TeamSectionBlock,
+  whyChooseUs: WhyChooseUsBlock,
 }
 
 export const RenderBlocks: React.FC<{
