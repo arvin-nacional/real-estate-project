@@ -131,7 +131,7 @@ export const PropertyFilters: React.FC<{
             variant={viewMode === 'split' ? 'default' : 'ghost'}
             size="sm"
             onClick={() => setViewMode('split')}
-            className="gap-1.5"
+            className="gap-1.5 hidden lg:flex"
           >
             <Map className="size-4" />
             <List className="size-4" />
@@ -277,7 +277,9 @@ export const PropertyFilters: React.FC<{
       )}
 
       {/* Main Content Area */}
-      <div className={viewMode === 'split' ? 'flex flex-col lg:flex-row gap-4' : ''}>
+      <div
+        className={viewMode === 'split' ? 'flex flex-col lg:flex-row gap-4' : 'flex flex-col gap-4'}
+      >
         {/* Map Panel */}
         {(viewMode === 'split' || viewMode === 'map') && (
           <div
