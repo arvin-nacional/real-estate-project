@@ -36,7 +36,7 @@ export const PropertyFilters: React.FC<{
 }> = ({ properties, totalPages, currentPage, initialFilters, initialMapCenter }) => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const [viewMode, setViewMode] = useState<'split' | 'list' | 'map'>('split')
+  const [viewMode, setViewMode] = useState<'split' | 'list' | 'map'>('list')
   const [selectedProperty, setSelectedProperty] = useState<string | null>(null)
   const [showFilters, setShowFilters] = useState(false)
 
