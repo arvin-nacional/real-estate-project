@@ -63,7 +63,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({
                   <div>
                     <div className="flex gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
                     <p className="text-foreground font-medium text-sm leading-relaxed line-clamp-3">
@@ -95,7 +95,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({
                   <div>
                     <div className="flex gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
                     <p className="text-foreground font-medium text-sm leading-relaxed line-clamp-3">
@@ -134,7 +134,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({
                   <div>
                     <div className="flex gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
                     <p className="text-foreground font-medium text-sm leading-relaxed line-clamp-3">
@@ -166,7 +166,7 @@ export const TestimonialsBlock: React.FC<TestimonialsBlockProps> = ({
                   <div>
                     <div className="flex gap-1 mb-3">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                       ))}
                     </div>
                     <p className="text-foreground font-medium text-sm leading-relaxed line-clamp-3">

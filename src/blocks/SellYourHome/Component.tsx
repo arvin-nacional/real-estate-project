@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'next/image'
 import {
   Home,
   Search,
@@ -14,7 +15,7 @@ import {
 import type { SellYourHomeBlock as SellYourHomeBlockProps, Media } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { getMediaUrl } from '@/utilities/getMediaUrl'
+import { Media as MediaComponent } from '@/components/Media'
 
 const iconMap = {
   Home,
@@ -38,48 +39,61 @@ export const SellYourHomeBlock: React.FC<SellYourHomeBlockProps> = ({
   links,
 }) => {
   const bgImage = backgroundImage as Media | undefined
-  const bgUrl = bgImage ? getMediaUrl(bgImage) : null
 
   return (
     <section className="py-16 md:py-24 mt-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Hero Area */}
-        <div
-          className="relative rounded-2xl overflow-hidden mb-16 py-16 md:py-24 px-8 md:px-16"
-          style={
-            bgUrl
-              ? {
-                  backgroundImage: `url(${bgUrl})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
-                }
-              : undefined
-          }
-        >
-          {bgUrl && <div className="absolute inset-0 bg-black/50" />}
-          {!bgUrl && (
-            <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary" />
-          )}
-
-          <div className="relative z-10 max-w-2xl">
-            {heading && (
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{heading}</h2>
-            )}
-            {description && (
-              <p className="text-lg text-white/90 mb-8 leading-relaxed">{description}</p>
-            )}
-            {Array.isArray(links) && links.length > 0 && (
-              <div className="flex flex-wrap gap-4">
-                {links.map(({ link }, i) => (
-                  <CMSLink
-                    key={i}
-                    {...link}
-                    className="bg-white text-[#0a2e2a] hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300"
-                  />
-                ))}
+        <div className="relative rounded-2xl overflow-hidden mb-16">
+          {bgImage ? (
+            <div className="relative h-[400px] md:h-[500px]">
+              <MediaComponent resource={bgImage} imgClassName="w-full h-full object-cover" fill />
+              <div className="absolute inset-0 bg-black/50" />
+              <div className="absolute inset-0 flex items-center justify-center px-8 md:px-16">
+                <div className="text-center max-w-2xl">
+                  {heading && (
+                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{heading}</h2>
+                  )}
+                  {description && (
+                    <p className="text-lg text-white/90 mb-8 leading-relaxed">{description}</p>
+                  )}
+                  {Array.isArray(links) && links.length > 0 && (
+                    <div className="flex flex-wrap gap-4 justify-center">
+                      {links.map(({ link }, i) => (
+                        <CMSLink
+                          key={i}
+                          {...link}
+                          className="bg-white text-[#0a2e2a] hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="relative py-16 md:py-24 px-8 md:px-16 bg-gradient-to-br from-primary to-secondary">
+              <div className="text-center max-w-2xl">
+                {heading && (
+                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{heading}</h2>
+                )}
+                {description && (
+                  <p className="text-lg text-white/90 mb-8 leading-relaxed">{description}</p>
+                )}
+                {Array.isArray(links) && links.length > 0 && (
+                  <div className="flex flex-wrap gap-4 justify-center">
+                    {links.map(({ link }, i) => (
+                      <CMSLink
+                        key={i}
+                        {...link}
+                        className="bg-white text-[#0a2e2a] hover:bg-primary hover:text-white font-semibold px-8 py-3 rounded-lg transition-all duration-300"
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* How It Works */}
