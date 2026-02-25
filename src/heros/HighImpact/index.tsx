@@ -22,18 +22,13 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
   const videoUrl = video ? getMediaUrl(video) : null
   const hasVideo = Boolean(videoUrl)
   const opacity = (overlayOpacity ?? 30) / 100
-  const posterImage =
-    media && typeof media === 'object' ? getMediaUrl(media as MediaType) : undefined
 
   useEffect(() => {
     setHeaderTheme('dark')
   })
 
   return (
-    <div
-      className="relative flex items-center justify-center text-white bg-gray-950"
-      data-theme="dark"
-    >
+    <div className="relative flex items-center justify-center text-white" data-theme="dark">
       <div className="h-screen mb-8 z-10 relative flex items-center justify-center">
         <div className="max-w-[1200px] md:text-center">
           {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
@@ -63,7 +58,6 @@ export const HighImpactHero: React.FC<Page['hero']> = ({
               muted
               playsInline
               className="absolute inset-0 w-full h-full object-cover -z-10"
-              poster={posterImage ?? undefined}
             >
               <source src={videoUrl} type="video/mp4" />
             </video>
